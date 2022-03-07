@@ -154,7 +154,7 @@ export const asyncRoutes = [
         meta: {
           title: '列表',
           icon: 'list',
-          roles: ['admin']
+          roles: ['editor']
         }
       },
       {
@@ -164,7 +164,7 @@ export const asyncRoutes = [
         meta: {
           title: '表单',
           icon: 'form',
-          roles: ['editor']
+          roles: ['admin']
         }
       }
     ]
