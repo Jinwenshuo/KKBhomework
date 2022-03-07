@@ -76,7 +76,7 @@ export const constantRoutes = [
     path: '/',
     component: Layout,
     redirect: '/dashboard',
-    hidden:true,
+    hidden: true,
     children: [
       {
         path: 'dashboard',
@@ -89,7 +89,7 @@ export const constantRoutes = [
   {
     path: '/documentation',
     component: Layout,
-    hidden:true,
+    hidden: true,
     children: [
       {
         path: 'index',
@@ -104,7 +104,7 @@ export const constantRoutes = [
     path: '/guide',
     component: Layout,
     redirect: '/guide/index',
-    hidden:true,
+    hidden: true,
     children: [
       {
         path: 'index',
@@ -136,7 +136,7 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
-{
+  {
     path: '/homework',
     component: Layout,
     redirect: '/jin',
@@ -144,7 +144,7 @@ export const asyncRoutes = [
     meta: {
       title: '作业',
       icon: 'lock',
-      roles: ['editor']
+      roles: ['admin', 'editor']
     },
     children: [
       {
@@ -153,6 +153,7 @@ export const asyncRoutes = [
         name: 'list',
         meta: {
           title: '列表',
+          icon: 'list',
           roles: ['admin']
         }
       },
@@ -162,22 +163,23 @@ export const asyncRoutes = [
         name: 'form',
         meta: {
           title: '表单',
-          roles:['editor']
+          icon: 'form',
+          roles: ['editor']
         }
       }
     ]
   },
   {
-      path: '/redeme',
-      component: Layout,
-      children: [
-        {
-          path: 'redeme',
-          component: () => import('@/views/readme/readme'),
-          name: '作业说明',
-          meta: { title: '作业说明', icon: 'education',roles: ['admin']}
-        }
-      ]
+    path: '/redeme',
+    component: Layout,
+    children: [
+      {
+        path: 'redeme',
+        component: () => import('@/views/readme/readme'),
+        name: '作业说明',
+        meta: { title: '作业说明', icon: 'education', roles: ['admin', 'editor'] }
+      }
+    ]
   },
 
   {
@@ -188,7 +190,7 @@ export const asyncRoutes = [
         path: 'index',
         component: () => import('@/views/hoc/components/index'),
         name: 'hoc',
-        meta: { title: 'HOC', icon: 'tab' ,roles:['editer']}
+        meta: { title: 'HOC', icon: 'tab', roles: ['editer'] }
       }
     ]
   },
@@ -198,7 +200,7 @@ export const asyncRoutes = [
     redirect: '/permission/page',
     alwaysShow: true, // will always show the root menu
     name: 'Permission',
-    hidden:true,
+    hidden: true,
     //
     meta: {
       title: 'Permission',
@@ -257,13 +259,12 @@ export const asyncRoutes = [
   nestedRouter,
   tableRouter,
 
-
   {
     path: '/example',
     component: Layout,
     redirect: '/example/list',
     name: 'Example',
-    hidden:true,
+    hidden: true,
     meta: {
       title: 'Example',
       icon: 'el-icon-s-help'
@@ -294,7 +295,7 @@ export const asyncRoutes = [
   {
     path: '/tab',
     component: Layout,
-    hidden:true,
+    hidden: true,
     children: [
       {
         path: 'index',
@@ -310,7 +311,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: 'noRedirect',
     name: 'ErrorPages',
-    hidden:true,
+    hidden: true,
     meta: {
       title: 'Error Pages',
       icon: '404'
@@ -324,6 +325,7 @@ export const asyncRoutes = [
       },
       {
         path: '404',
+        redirect: 'noRedirect',
         component: () => import('@/views/error-page/404'),
         name: 'Page404',
         meta: { title: '404', noCache: true }
@@ -334,7 +336,7 @@ export const asyncRoutes = [
   {
     path: '/error-log',
     component: Layout,
-    hidden:true,
+    hidden: true,
     children: [
       {
         path: 'log',
@@ -351,7 +353,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/excel/export-excel',
     name: 'Excel',
-    hidden:true,
+    hidden: true,
     meta: {
       title: 'Excel',
       icon: 'excel'
@@ -390,7 +392,7 @@ export const asyncRoutes = [
     redirect: '/zip/download',
     alwaysShow: true,
     name: 'Zip',
-    hidden:true,
+    hidden: true,
     meta: { title: 'Zip', icon: 'zip' },
     children: [
       {
@@ -402,13 +404,11 @@ export const asyncRoutes = [
     ]
   },
 
-
-
   {
     path: '/pdf',
     component: Layout,
     redirect: '/pdf/index',
-    hidden:true,
+    hidden: true,
     children: [
       {
         path: 'index',
@@ -427,7 +427,7 @@ export const asyncRoutes = [
   {
     path: '/theme',
     component: Layout,
-    hidden:true,
+    hidden: true,
     children: [
       {
         path: 'index',
@@ -441,7 +441,7 @@ export const asyncRoutes = [
   {
     path: '/clipboard',
     component: Layout,
-    hidden:true,
+    hidden: true,
     children: [
       {
         path: 'index',
@@ -455,7 +455,7 @@ export const asyncRoutes = [
   {
     path: 'external-link',
     component: Layout,
-    hidden:true,
+    hidden: true,
     children: [
       {
         path: 'https://github.com/PanJiaChen/vue-element-admin',
@@ -465,7 +465,8 @@ export const asyncRoutes = [
   },
 
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  // { path: '*', redirect: '/404', hidden: true }
+  { path: '*', redirect: '/', hidden: true }
 ]
 
 const createRouter = () => new Router({
